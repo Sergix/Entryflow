@@ -1,4 +1,10 @@
-(#1)[7/7/2017-23:32 pre-alpha]
+(#2)[7/8/2017-9:50 pre-alpha Sergix]
+    Created electron dependencies using electron-forge.
+    Created TypeScript dependencies.
+    Created base Vue project sources.
+    Pushed updates to Git.
+
+(#1)[7/7/2017-23:32 pre-alpha Sergix]
     Created base repository and logo.
     Uploaded README and changelog.
     No current assigned project version; state is currently in pre-alpha ("preperation") stage.
