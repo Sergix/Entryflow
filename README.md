@@ -1,4 +1,3 @@
-# Entryflow
 [![Entryflow](https://sergix.github.io/img/entryflow.png)](https://sergix.github.io/projects/entryflow/index.html)
 
 ## Definition
