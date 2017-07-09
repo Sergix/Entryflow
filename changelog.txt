@@ -1,3 +1,12 @@
+(#4)[7/9/2017-9:08 pre-alpha Sergix]
+    Sidebar now has settings (does nothing atm) and GitHub (opens project page) icons.
+    "Load Project" button now opens a dialog and selects a directory to use as a project, and puts the files in the sidebar and can be opened in the editor.
+    Pushed updates to Git.
+
+(#3)[7/8/2017-18:52 pre-alpha Sergix]
+    Created basic window with sidebar and text input area.
+    Created "css" and "vue" dirs in the src folder.
+
 (#2)[7/8/2017-9:50 pre-alpha Sergix]
     Created electron dependencies using electron-forge.
     Created TypeScript dependencies.

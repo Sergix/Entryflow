@@ -1,8 +1,8 @@
 {
   "name": "entryflow",
   "productName": "entryflow",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "version": "0.1.0",
+  "description": "Entryflow is a program designed to help ease project documentation and changelog writing.",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -11,8 +11,8 @@
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "Sergi",
-  "license": "MIT",
+  "author": "Sergix",
+  "license": "GNU",
   "config": {
     "forge": {
       "make_targets": {
