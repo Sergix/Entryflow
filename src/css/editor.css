@@ -36,9 +36,8 @@ code {
 
 #sidebar-icons {
     padding-left: 20px;
+    margin-top: 20px;
     margin-right: 0;
-    bottom: 0;
-    position: fixed;
 }
 
 #sidebar-icons a {

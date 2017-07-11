@@ -46,6 +46,7 @@
   "dependencies": {
     "electron-compile": "^6.4.1",
     "electron-devtools-installer": "^2.2.0",
+    "jsonfile": "^3.0.1",
     "vue": "^2.3.4"
   },
   "devDependencies": {
