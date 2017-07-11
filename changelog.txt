@@ -2,6 +2,7 @@
     Created appdata.js, containing methods for interacting with Entryflow's AppData directory.
     project_dir and project_files moved to editor component.
     Closing and re-opening the app automatically loads last loaded project.
+    Pushed updates to Git.
 
 (#6)[7/9/2017-20:21 pre-alpha Sergix]
     Moved sidebar icons to top of window.
