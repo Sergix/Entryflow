@@ -1,0 +1,53 @@
+#loader {
+    padding: 5%;
+}
+
+#loader h2 {
+    font-family: Courier New, Courier, monospace;
+    font-size: 12pt;
+}
+
+#loader h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24pt;
+}
+
+#form {
+    padding: 20px;
+}
+
+#form div, #doc-title {
+    margin: 10px;
+    font-size: 10pt;
+    font-family: Geneva, Verdana, sans-serif;
+}
+
+#form div button, #form div input {
+    margin-left: 20px;
+}
+
+#form div label span {
+    margin-left: 20px;
+}
+
+#form #error-text {
+    color: red;
+    bottom: 8px;
+    right: 80px;
+    position: fixed;
+}
+
+#form #next {
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+}
+
+#doc-title {
+    margin-top: 20px;
+    margin-bottom: -20px;
+}
+
+#doc-options {
+    padding: 20px;
+}

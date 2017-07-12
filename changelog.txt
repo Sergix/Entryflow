@@ -1,3 +1,8 @@
+(#8)[7/12/2017-1:37 pre-alpha Sergix]
+    If no project is loaded, it automatically brings up a project loading process to select changelog and doc dependencies.
+    Styling and final scripting needs to be completed for this.
+    Pushed updates to Git.
+
 (#7)[7/10/2017-21:41 pre-alpha Sergix]
     Created appdata.js, containing methods for interacting with Entryflow's AppData directory.
     project_dir and project_files moved to editor component.

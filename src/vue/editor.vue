@@ -1,5 +1,5 @@
 <template>
-    <textarea :value="input"></textarea>
+    <textarea id="file-editor" :value="input"></textarea>
 </template>
 
 <script>

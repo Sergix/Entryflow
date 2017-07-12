@@ -1,7 +1,7 @@
 import fs from 'fs';
 import jf from 'jsonfile';
 import sidebar from './vue/sidebar';
-const { app } = require('electron').remote;
+const { app, dialog } = require('electron').remote;
 
 jf.spaces = 4;
 
@@ -27,12 +27,22 @@ const checkAppData = () => {
     jsonData = jf.readFileSync(projectFile);
 
     if (jsonData.project !== null) {
-        editor.project_dir = jsonData.project;
+        editor.project_dir = loader.project_dir = jsonData.project;
         sidebar.methods.openProjectDir();
+    } else {
+        let path = dialog.showOpenDialog({
+            title: 'Select Project Directory',
+            buttonLabel: 'Use',
+            properties: ['openDirectory']
+        });
+
+        setAppProject(path !== undefined ? path[0] : null);
     }
 };
 
 const setAppProject = (dir) => {
     jsonData.project = dir;
-    exportAppData();
+    $('#wrapper').toggleClass('toggled');
+
+    nextLoaderPage(0);
 };

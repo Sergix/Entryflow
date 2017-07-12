@@ -8,8 +8,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link rel="stylesheet" href="../assets/css/sidebar.css">
         <link rel="stylesheet" href="css/editor.css">
+        <link rel="stylesheet" href="css/loader.css">
     </head>
     <body>
+        <div id="loader"></div>
+
         <div id="wrapper">
             <div id="sidebar-wrapper"></div>
         </div>
@@ -23,7 +26,7 @@
     import Editor from './vue/editor';
     import Sidebar from './vue/sidebar';
 
-    const editor = new Vue(Editor).$mount('#editor');
+    //const editor = new Vue(Editor).$mount('#editor');
     const sidebar = new Vue(Sidebar).$mount('#sidebar-wrapper');
 
     </script>
@@ -36,10 +39,11 @@
     <script src="../assets/js/feather.min.js"></script>
 
     <script src="appdata.js"></script>
+    <script src="loader.js"></script>
 
     <script>
         feather.replace();
-        //$("#wrapper").toggleClass("toggled");
+        $("#wrapper").toggleClass("toggled");
 
         checkAppData();
     </script>

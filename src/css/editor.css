@@ -5,7 +5,7 @@ html, body, #editor {
     color: #333;
 }
 
-textarea, #editor {
+#file-editor, #editor {
     display: inline-block;
     margin-left: 200px;
     width: 100%;

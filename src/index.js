@@ -13,7 +13,9 @@ const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    minWidth: 600,
+    minHeight: 320
   });
 
   mainWindow.setMenu(null);
