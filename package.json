@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "lint": "echo \"No linting configured\"",
-    "test": "xvfb-maybe electron-mocha ./src/*.js"
+    "test": "electron-forge start"
   },
   "keywords": [],
   "author": "Sergix",
