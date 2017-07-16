@@ -1,14 +1,23 @@
 <template>
-    <div id="loader" class="container">
-        <h2 class="row">Project Directory: {{ project_dir }}</h2>
-        <h1 class="row">Select Changelog and Documentation File Path</h1>
-        <div id="form">
-            <label class="row"><span class="col-sm-4">Changelog</span><input disabled class="col-sm-4" :value="changelog_path" type="text"><button v-on:click="openChangelog">Browse</button></label>
-            <label class="row"><span class="col-sm-4">Documentation</span><input disabled class="col-sm-4" :value="doc_path" type="text"><button v-on:click="openDocs">Browse</button></label>
+<div id="content">
+    <div id="loader" class="active">
+        <h1 class="text-center col-sm-12">Select Changelog and Documentation File Path</h1>
+        <div id="form" class="form">
+            <div class="row form-group">
+                <label for="changelog-input" class="col-sm-2 control-label text-right">Changelog</label>
+                <input disabled class="col-sm-6 form-control" :value="changelog_path" id="changelog-input" type="text" placeholder="Click Browse...">
+                <button v-on:click="openChangelog" class="col-sm-2 btn btn-default">Browse</button>
+            </div>
+            <div class="row form-group">
+                <label for="doc-input" class="col-sm-2 control-label text-right">Documentation</label>
+                <input disabled class="col-sm-6 form-control" :value="doc_path" id="doc-input" type="text" placeholder="Click Browse...">
+                <button v-on:click="openDocs" class="col-sm-2 btn btn-default">Browse</button>
+            </div>
             <p id="error-text">{{ err }}</p>
             <button id="next" v-on:click="next">Next</button>
         </div>
     </div>
+</div>
 </template>
 
 <script>

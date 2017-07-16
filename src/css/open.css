@@ -1,0 +1,12 @@
+#select-list {
+	margin-top: 20px;
+}
+
+#select-list li span, #select-list li a svg {
+	margin-top: 7px;
+	color: #000;
+}
+
+#select-list li a svg:hover {
+	color: #aaa;
+}

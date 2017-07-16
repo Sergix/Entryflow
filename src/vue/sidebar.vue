@@ -6,9 +6,9 @@
             <a v-on:click="github" href="#"><i data-feather="github"></i></a>
         </li>
         <li class="sidebar-brand">
-            <a href="#" v-on:click="openProjectDialog">
+            <a href="#" v-on:click="selectOption">
                 <i data-feather="folder"></i>
-                Load Project
+                {{ project_name }}
             </a>
         </li>
 
@@ -19,77 +19,44 @@
 
 <script>
 import editor from './editor';
+import sidebar from './sidebar';
 import fs from 'fs';
 const { dialog, shell } = require('electron').remote;
 
 export default {
     name: 'sidebar',
     data: {
+        project_name: '',
         project_files: []
     },
     methods: {
-        openProjectDialog: (event) => {
-            let path = dialog.showOpenDialog({
-                title: 'Select Project Directory',
-                buttonLabel: 'Use',
-                properties: ['openDirectory']
-            });
-            editor.data.project_dir = path !== undefined ? path[0] : null;
-
-            setAppProject(editor.data.project_dir);
-
-            sidebar.openProjectDir();
-        },
-
         github: (event) => {
-            shell.openExternal('https://github.com/Sergix/Entryflow');
+            shell.openExternal('https://github.com/Sergix/Entryflow')
         },
         
         settings: (event) => {
 
         },
 
-        openProjectDir: () => {
-            if (editor.data.project_dir === null || editor.data.project_dir === undefined || editor.data.project_dir === '')
-                return undefined;
-
-            fs.readdir(editor.data.project_dir, (err, files) => {
-                if (err)
-                    return 0;
-
-                sidebar.project_files = [];
-
-                for (let i = 0; i < files.length; i++) {
-                    // if (fs.readdir(filename, (err, files) => {
-                    //     if (files === undefined) // Is not a directory
-                    //         return 1;
-                    //     else
-                    //         return 0;
-                    // }))
-                    
-                    sidebar.project_files.push(files[i]);
-                    // else {
-
-                    // }
-                }
-            });
+        selectOption: (event) => {
+            selectOption()
         },
 
         openProjectFile: (event) => {
-            let filename = editor.data.project_dir + "\\" + event.toElement.text;
+            // let filename = editor.data.project_dir + "\\" + event.toElement.text;
 
-            fs.readdir(filename, (err, files) => {
-                if (files !== undefined) { // Is a directory
-                    sidebar.extendProjectFolder();
-                }
-            });
+            // fs.readdir(filename, (err, files) => {
+            //     if (files !== undefined) { // Is a directory
+            //         sidebar.extendProjectFolder();
+            //     }
+            // });
 
-            fs.readFile(
-                filename,
-                'utf8',
-                (err, data) => {
-                    editor.data.input = data;
-            });
+            // fs.readFile(
+            //     filename,
+            //     'utf8',
+            //     (err, data) => {
+            //         editor.data.input = data;
+            // });
         },
 
         extendProjectFolder: () => {

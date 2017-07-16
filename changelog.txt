@@ -1,3 +1,9 @@
+(#9)[7/16/2017-16:58 pre-alpha Sergix]
+    Created an option selection page to choose either to select an existing project or create a new project. It is activated by clicking on the project name in the sidebar.
+    Import project page presents a list of projects present in project.data and allows the user to select one to load.
+    Created Travis CI testing yml. Installed Xvfb npm package for CI testing.
+    Pushed updates to Git.
+
 (#8)[7/12/2017-1:37 pre-alpha Sergix]
     If no project is loaded, it automatically brings up a project loading process to select changelog and doc dependencies.
     Styling and final scripting needs to be completed for this.

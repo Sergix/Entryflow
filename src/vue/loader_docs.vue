@@ -1,6 +1,6 @@
 <template>
-    <div id="loader" class="container">
-        <h2 class="row">Project Directory: {{ project_dir }}</h2>
+<div id="content" class="container">
+    <div id="loader" class="active container">
         <h1 class="row">Documentation Options</h1>
         <div id="form" class="form-inline">
             <div class="form-group"><span>Single documentation file (optional):</span><input disabled class="form-control" :value="file_path" type="text"><button class="btn btn-default" v-on:click="selectFile" type="button">Browse</button></div>
@@ -15,6 +15,7 @@
             <button id="next" v-on:click="next">Next</button>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -25,7 +26,6 @@ const { dialog } = require('electron').remote;
 export default {
     name: 'loader_changelog',
     data: {
-        project_dir: editor.data.project_dir,
         doc_options: [],
         file_path: '',
         err: ''

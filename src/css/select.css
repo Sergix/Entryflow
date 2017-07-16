@@ -1,0 +1,7 @@
+#select-project button {
+	margin-top: 5%;
+}
+
+#select-project #cancel-button {
+	float: right;
+}

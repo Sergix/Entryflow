@@ -1,48 +1,55 @@
-import fs from 'fs';
-import jf from 'jsonfile';
-import sidebar from './vue/sidebar';
-const { app, dialog } = require('electron').remote;
+import Vue from 'vue'
+import fs from 'fs'
+import jf from 'jsonfile'
+import sidebar from './vue/sidebar'
+import editor from './vue/editor'
+import open from './vue/open'
+const { app, dialog } = require('electron').remote
 
-jf.spaces = 4;
+jf.spaces = 4
 
-const appData = app.getPath("appData");
-const appPath = appData + '\\Entryflow';
-const projectFile = appPath + '\\project.data';
-let jsonData = {"project": null};
+const appData = app.getPath('appData')
+const appPath = appData + '\\Entryflow'
+const projectFile = appPath + '\\project.data'
+let jsonData = {'open_project': null, 'projects': []}
 
 const exportAppData = () => {
-    jf.writeFileSync(projectFile, jsonData);
-};
+  jf.writeFileSync(projectFile, jsonData)
+}
 
 const createAppData = () => {
-    fs.mkdirSync(appPath);
+  fs.mkdirSync(appPath)
 
-    jf.writeFileSync(projectFile, jsonData);
-};
+  jf.writeFileSync(projectFile, jsonData)
+}
 
 const checkAppData = () => {
-    if (!fs.existsSync(appPath))
-        createAppData();
+  if (!fs.existsSync(appPath)) { createAppData() }
 
-    jsonData = jf.readFileSync(projectFile);
+  jsonData = jf.readFileSync(projectFile)
+  open.data.projects = jsonData.projects
 
-    if (jsonData.project !== null) {
-        editor.project_dir = loader.project_dir = jsonData.project;
-        sidebar.methods.openProjectDir();
-    } else {
-        let path = dialog.showOpenDialog({
-            title: 'Select Project Directory',
-            buttonLabel: 'Use',
-            properties: ['openDirectory']
-        });
+  if (jsonData.open_project !== null) {
+    returnToEditor()
 
-        setAppProject(path !== undefined ? path[0] : null);
+    for (let i = 0; i < jsonData.projects.length; i++) {
+      if (jsonData.projects[i].project_name === jsonData.open_project) {
+        editor.data.project = jsonData.projects[i]
+        sidebar.data.project_name = jsonData.projects[i].project_name
+        break
+      }
     }
-};
+  } else {
+    selectOption()
+  }
+}
 
 const setAppProject = (dir) => {
-    jsonData.project = dir;
-    $('#wrapper').toggleClass('toggled');
+  jsonData.open_project = dir
+  nextLoaderPage(0)
+}
 
-    nextLoaderPage(0);
-};
+const newProject = (settings) => {
+  jsonData.projects.push(settings)
+  exportAppData()
+}

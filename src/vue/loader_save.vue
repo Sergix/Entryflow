@@ -1,6 +1,6 @@
 <template>
-    <div id="loader" class="container">
-        <h2 class="row">Project Directory: {{ project_dir }}</h2>
+<div id="content" class="container">
+    <div id="loader" class="active container">
         <h1 class="row">Save Project</h1>
         <div id="form" class="form-inline">
             <div class="form-group"><span>Enter project name:</span><input v-model="project_name" class="form-control" type="text"></div>
@@ -8,6 +8,7 @@
             <button id="next" v-on:click="next">Finish</button>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -21,7 +22,6 @@ const { dialog } = require('electron').remote;
 export default {
     name: 'loader_changelog',
     data: {
-        project_dir: editor.data.project_dir,
         project_name: '',
         err: ''
     },
@@ -31,13 +31,17 @@ export default {
                 loader.data.err = 'Enter the name of the project';
                 return 0;
             }
-            jsonData.changelog_path = changelog.data.file_path === '' ? changelog.data.file_path : open.data.changelog_path;
-            jsonData.changelog_header = changelog.data.header_format;
-            jsonData.changelog_direction = changelog.data.entry_direction;
-            jsonData.doc_path = docs.data.file_path === '' ? docs.data.file_path : open.data.doc_path;
-            jsonData.doc_options = docs.data.doc_options;
+            let project_settings = {
+                'project_name': loader.data.project_name,
+                'changelog_path': changelog.data.file_path === '' ? changelog.data.file_path : open.data.changelog_path,
+                'changelog_header': changelog.data.header_format,
+                'changelog_direction': changelog.data.entry_direction,
+                'doc_path': docs.data.file_path === '' ? docs.data.file_path : open.data.doc_path,
+                'doc_options': docs.data.doc_options
+            };
 
-            exportAppData();
+            newProject(project_settings);
+            returnToEditor();
         }
     }
 }
