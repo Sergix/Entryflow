@@ -8,7 +8,7 @@
 export default {
   name: 'editor',
   data: {
-      project: '',
+      project: {},
       input: "Open a project file to display here"
   }
 }

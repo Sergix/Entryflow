@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import editor from './editor';
-import loader from './loader_docs';
-const { dialog } = require('electron').remote;
+import editor from './editor'
+import loader from './loader_docs'
+const { dialog } = require('electron').remote
 
 export default {
     name: 'loader_changelog',
@@ -41,12 +41,15 @@ export default {
                     {name: 'Markdown', extensions: ['md']},
                     {name: 'All Files', extensions: ['*']}
                 ]
-            });
+            })
 
-            loader.data.file_path = path !== undefined ? path[0] : null;
+            loader.data.file_path = path !== undefined ? path[0] : null
         },
         next: (event) => {
-            nextLoaderPage(3);
+            if (loader.data.file_path === null || loader.data.file_path === undefined)
+                loader.data.file_path = ''
+
+            nextLoaderPage(3)
         }
     }
 }

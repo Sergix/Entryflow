@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import editor from './editor';
-import loader from './loader_save';
-import changelog from './loader_changelog';
-import docs from './loader_docs';
-import open from './loader_open';
-const { dialog } = require('electron').remote;
+import editor from './editor'
+import loader from './loader_save'
+import changelog from './loader_changelog'
+import docs from './loader_docs'
+import open from './loader_open'
+const { dialog } = require('electron').remote
 
 export default {
     name: 'loader_changelog',
@@ -28,20 +28,21 @@ export default {
     methods: {
         next: (event) => {
             if (loader.data.project_name === '') {
-                loader.data.err = 'Enter the name of the project';
-                return 0;
+                loader.data.err = 'Enter the name of the project'
+                return 0
             }
+            console.log(changelog.data.file_path)
             let project_settings = {
                 'project_name': loader.data.project_name,
-                'changelog_path': changelog.data.file_path === '' ? changelog.data.file_path : open.data.changelog_path,
+                'changelog_path': changelog.data.file_path === '' ? open.data.changelog_path : changelog.data.file_path,
                 'changelog_header': changelog.data.header_format,
                 'changelog_direction': changelog.data.entry_direction,
-                'doc_path': docs.data.file_path === '' ? docs.data.file_path : open.data.doc_path,
+                'doc_path': docs.data.file_path === '' ? open.data.doc_path : docs.data.file_path,
                 'doc_options': docs.data.doc_options
-            };
+            }
 
-            newProject(project_settings);
-            returnToEditor();
+            newProject(project_settings)
+            returnToEditor()
         }
     }
 }

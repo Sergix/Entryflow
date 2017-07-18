@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import loader from './loader_changelog';
-const { dialog } = require('electron').remote;
+import loader from './loader_changelog'
+const { dialog } = require('electron').remote
 
 export default {
     name: 'loader_changelog',
@@ -40,16 +40,17 @@ export default {
                     {name: 'Markdown', extensions: ['md']},
                     {name: 'All Files', extensions: ['*']}
                 ]
-            });
+            })
 
-            loader.data.file_path = path !== undefined ? path[0] : null;
+            loader.data.file_path = path !== undefined ? path[0] : null
         },
         next: (event) => {
             if (loader.data.entry_direction === '' && loader.data.file_path !== '') {
-                loader.data.err = 'Select an entry direction';
-                return 0;
+                loader.data.err = 'Select an entry direction'
+                return 0
             }
-            nextLoaderPage(2);
+
+            nextLoaderPage(2)
         }
     }
 }

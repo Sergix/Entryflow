@@ -7,12 +7,27 @@
         </li>
         <li class="sidebar-brand">
             <a href="#" v-on:click="selectOption">
-                <i data-feather="folder"></i>
                 {{ project_name }}
             </a>
         </li>
 
-        <li v-for="file in project_files" v-bind:key="file"><a v-on:click="openProjectFile" href="#">{{ file }}</a></li>
+        <li class="sidebar-brand">
+            <a href="#doc-files" v-on:click="openIfFile" v-html="doc_content" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="doc-files"></a>
+        </li>
+        <div id="doc-files">
+            <li v-for="file in doc_files" v-bind:key="file">
+                <a v-on:click="openDocFile" href="#">{{ file }}</a>
+            </li>
+        </div>
+
+        <li class="sidebar-brand">
+            <a href="#changelog-files" v-on:click="openIfFile" v-html="changelog_content" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="changelog-files"></a>
+        </li>
+        <div id="changelog-files">
+            <li v-for="file in changelog_files" v-bind:key="file">
+                <a v-on:click="openChangelogFile" href="#">{{ file }}</a>
+            </li>
+        </div>
     </ul>
 </div>
 </template>
@@ -27,7 +42,14 @@ export default {
     name: 'sidebar',
     data: {
         project_name: '',
-        project_files: []
+        doc_files: [],
+        changelog_files: [],
+        doc_file: '',
+        changelog_file: '',
+        doc_content: '<i data-feather="chevron-right"></i>Documentation',
+        changelog_content: '<i data-feather="chevron-right"></i>Changelog',
+        doc_expanded: true,
+        changelog_expanded: true
     },
     methods: {
         github: (event) => {
@@ -42,25 +64,74 @@ export default {
             selectOption()
         },
 
-        openProjectFile: (event) => {
-            // let filename = editor.data.project_dir + "\\" + event.toElement.text;
+        openDocFile: (event) => {
+            let filename;
+            if (event === null || event === undefined)
+                filename = editor.data.project.doc_path
+            else
+                filename = editor.data.project.doc_path + '\\' + event.toElement.text
 
-            // fs.readdir(filename, (err, files) => {
-            //     if (files !== undefined) { // Is a directory
-            //         sidebar.extendProjectFolder();
-            //     }
-            // });
-
-            // fs.readFile(
-            //     filename,
-            //     'utf8',
-            //     (err, data) => {
-            //         editor.data.input = data;
-            // });
+            fs.readFile(
+                filename,
+                'utf8',
+                (err, data) => {
+                    editor.data.input = data
+            });
         },
 
-        extendProjectFolder: () => {
-            
+        openChangelogFile: (event) => {
+            let filename;
+            if (event === null || event === undefined)
+                filename = editor.data.project.changelog_path
+            else
+                filename = editor.data.project.changelog_path + '\\' + event.toElement.text
+
+            fs.readFile(
+                filename,
+                'utf8',
+                (err, data) => {
+                    editor.data.input = data
+            });
+        },
+
+        openIfFile: (event) => {
+            let name = event.toElement.innerText
+
+            if (name === 'Documentation') {
+                if (sidebar.data.doc_file !== '') {
+                    sidebar.methods.openDocFile()
+                    return
+                }
+                if (sidebar.data.doc_expanded) sidebar.data.doc_content = '<i data-feather="chevron-right"></i>Documentation'
+                else sidebar.data.doc_content = '<i data-feather="chevron-down"></i>Documentation'
+                sidebar.data.doc_expanded = !sidebar.data.doc_expanded
+            } else if (name === 'Changelog') {
+                if (sidebar.data.changelog_file !== '') {
+                    sidebar.methods.openChangelogFile()
+                    return
+                }
+                if (sidebar.data.changelog_expanded) sidebar.data.changelog_content = '<i data-feather="chevron-right"></i>Changelog'
+                else sidebar.data.changelog_content = '<i data-feather="chevron-down"></i>Changelog'
+                sidebar.data.changelog_expanded = !sidebar.data.changelog_expanded
+            }
+        },
+
+        generateFileList: () => {
+            if (fs.statSync(editor.data.project.doc_path).isFile()) {
+                sidebar.data.doc_file = editor.data.project.doc_path
+                sidebar.data.doc_content = 'Documentation'
+            } else {
+                let doc_files = fs.readdirSync(editor.data.project.doc_path)
+                sidebar.data.doc_files = doc_files
+            }
+
+            if (fs.statSync(editor.data.project.changelog_path).isFile()) {
+                sidebar.data.changelog_file = editor.data.project.changelog_path
+                sidebar.data.changelog_content = 'Changelog'
+            } else {
+                let changelog_files = fs.readdirSync(editor.data.project.changelog_path)
+                sidebar.data.changelog_files = changelog_files
+            }
         }
     }
 }

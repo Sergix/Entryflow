@@ -53,10 +53,10 @@ export default {
             loader.data.doc_path = path !== undefined ? path[0] : null;
         },
         next: (event) => {
-            if (loader.data.changelog_path === '') {
+            if (loader.data.changelog_path === '' || loader.data.changelog_path === undefined) {
                 loader.data.err = 'Select Changelog Directory';
                 return 0;
-            } else if (loader.data.doc_path === '') {
+            } else if (loader.data.doc_path === '' || loader.data.doc_path === undefined) {
                 loader.data.err = 'Select Documentation directory';
                 return 0;
             }

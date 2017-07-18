@@ -10,7 +10,7 @@ jf.spaces = 4
 
 const appData = app.getPath('appData')
 const appPath = appData + '\\Entryflow'
-const projectFile = appPath + '\\project.data'
+const projectFile = appPath + '\\project.json'
 let jsonData = {'open_project': null, 'projects': []}
 
 const exportAppData = () => {
@@ -24,7 +24,7 @@ const createAppData = () => {
 }
 
 const checkAppData = () => {
-  if (!fs.existsSync(appPath)) { createAppData() }
+  if (!fs.existsSync(appPath)) createAppData()
 
   jsonData = jf.readFileSync(projectFile)
   open.data.projects = jsonData.projects
@@ -36,6 +36,7 @@ const checkAppData = () => {
       if (jsonData.projects[i].project_name === jsonData.open_project) {
         editor.data.project = jsonData.projects[i]
         sidebar.data.project_name = jsonData.projects[i].project_name
+        sidebar.methods.generateFileList()
         break
       }
     }
@@ -51,5 +52,8 @@ const setAppProject = (dir) => {
 
 const newProject = (settings) => {
   jsonData.projects.push(settings)
+  jsonData.open_project = settings.project_name
+  editor.data.project = settings
   exportAppData()
+  checkAppData()
 }

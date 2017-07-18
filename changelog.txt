@@ -1,3 +1,9 @@
+(#10)[7/17/2017-22:07 pre-alpha Sergix]
+    Project changelog and documentation directories are now collapsible.
+    Updated the styling of a couple of the loader pages.
+    Sidebar section titles can now open the project changelog/documentation file if it uses a single file.
+    Pushed updates to Git.
+
 (#9)[7/16/2017-16:58 pre-alpha Sergix]
     Created an option selection page to choose either to select an existing project or create a new project. It is activated by clicking on the project name in the sidebar.
     Import project page presents a list of projects present in project.data and allows the user to select one to load.
