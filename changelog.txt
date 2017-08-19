@@ -1,4 +1,10 @@
-(#11)[8/19/2017-22:07 pre-alpha Sergix]
+(#12)[8/19/2017-27:04 pre-alpha Sergix]
+    Fixed error in timestamp in changelog entry #11.
+    Loading the changelog now grabs the amount of entries and sets the project entry count to that number. It gets that number by turning the changelog header into a regular expression and comparing every line in the file against it.
+    Settings page includes section for editing the entry count.
+    Pushed updates to Git.
+
+(#11)[8/19/2017-15:30 pre-alpha Sergix]
     Massive pre-release update.
     Project settings page created.
     Editor now uses the ACE editor API, and auto-inserts changelog entries after the user hits the ENTER key twice (or two blank newlines).

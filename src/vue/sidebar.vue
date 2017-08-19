@@ -64,7 +64,7 @@ export default {
         },
 
         save: (event) => {
-            fs.writeFileSync(editor.data.open_file, editor.data.input)
+            fs.writeFileSync(editor.data.open_file, editor.data.file_editor.session.toString())
         },
 
         selectOption: (event) => {
@@ -84,7 +84,7 @@ export default {
                 filename,
                 'utf8',
                 (err, data) => {
-                    editor.data.input = data
+                    editor.methods.insertData(data, 'doc')
             });
         },
 
@@ -101,7 +101,7 @@ export default {
                 filename,
                 'utf8',
                 (err, data) => {
-                    editor.data.input = data
+                    editor.methods.insertData(data, 'changelog')
             });
         },
 

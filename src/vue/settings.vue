@@ -12,6 +12,10 @@
 				<input id="project_name" class="col-sm-6 form-control" type="text" v-model="project.project_name">
 			</div>
 			<div class="form-group row">
+				<label for="entrynum" class="col-sm-2 control-label">Changelog Entries</label>
+				<input id="entrynum" class="col-sm-6 form-control" v-model="project.entry_count" type="number">
+			</div>
+			<div class="form-group row">
 				<label for="docfile" class="col-sm-2 control-label">Documentation File</label>
 				<input disabled id="docfile" class="col-sm-6 form-control" :value="docfile" type="text">
 				<button class="col-sm-2 btn btn-default" v-on:click="selectFile" type="button">Browse</button>
@@ -35,7 +39,7 @@
 				<label for="header_format" class="control-label">
 					Entry header format (%d = day, %m = month, %y = year, %h = hour, %hm = hour (24-hour format), %mi = minute, %s = second, %e = entry number, %v = project version, %u = user name)
 				</label>
-				<textarea id="header_format" class="col-sm-12" v-model="project.header_format" type="text"></textarea>
+				<textarea id="header_format" class="col-sm-12 form-control" rows="1" :value="project.header_format" v-model="project.header_format" type="text"></textarea>
 			</div>
 		</div>
 	</div>
@@ -43,6 +47,9 @@
 </template>
 
 <script>
+import sidebar from './sidebar'
+import settings from './settings'
+
 export default {
 	name: 'settings',
 	data: {
@@ -50,6 +57,11 @@ export default {
 	},
 	methods: {
 		back: (e) => {
+			sidebar.data.project_name = settings.data.project.project_name
+			jsonData.open_project = settings.data.project.project_name
+
+			sidebar.methods.generateFileList()
+			exportAppData()
 			returnToEditor()
 		}
 	}
