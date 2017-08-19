@@ -1,18 +1,36 @@
 <template>
-<div id="content" class="container">
-    <div id="loader" class="active container">
-        <h1 class="row">Documentation Options</h1>
-        <div id="form" class="form-inline">
-            <div class="form-group"><span>Single documentation file (optional):</span><input disabled class="form-control" :value="file_path" type="text"><button class="btn btn-default" v-on:click="selectFile" type="button">Browse</button></div>
-            <span id="doc-title" class="row">Documentation content sections (check all to be included):</span>
-            <div id="doc-options" class="row">
-                <div class="checkbox"><label><input type="checkbox" id="table-contents" value="table-contents" v-model="doc_options"><span>Table of Contents</span></label></div>
-                <div class="checkbox"><label><input type="checkbox" id="changelog" value="changelog" v-model="doc_options"><span>Changelog</span></label></div>
-                <div class="checkbox"><label><input type="checkbox" id="build-list" value="build-list" v-model="doc_options"><span>Build List</span></label></div>
-                <div class="checkbox"><label><input type="checkbox" id="footer" value="footer" v-model="doc_options"><span>Footer</span></label></div>
+<div id="content">
+    <div id="loader" class="active">
+        <h1 class="text-center col-sm-12">Documentation Options</h1>
+        <div class="form">
+            <div class="row form-group">
+                <label for="doc-file" class="col-sm-2 control-label text-right">Project file</label>
+                <input disabled class="col-sm-6 form-control" id="doc-file" type="text" placeholder="Click Browse..." :value="file_path">
+                <button type="button" class="col-sm-2 btn btn-default" v-on:click="selectFile">Browse</button>
+            </div>
+            <div id="options" class="form-group">
+                <label for="doc-options" class="row">Content sections</label>
+                <div id="doc-options">
+                    <div class="checkbox row">
+                        <input type="checkbox" id="table-contents" value="table-contents" v-model="doc_options">
+                        <label for="table-contents">Table of Contents</label>
+                    </div>
+                    <div class="checkbox row">
+                        <input type="checkbox" id="changelog" value="changelog" v-model="doc_options">
+                        <label for="changelog">Changelog</label>
+                    </div>
+                    <div class="checkbox row">
+                        <input type="checkbox" id="build-list" value="build-list" v-model="doc_options">
+                        <label for="build-list">Build List</label>
+                    </div>
+                    <div class="checkbox row">
+                        <input type="checkbox" id="footer" value="footer" v-model="doc_options">
+                        <label for="footer">Footer</label>
+                    </div>
+                </div>
             </div>
             <p id="error-text">{{ err }}</p>
-            <button id="next" v-on:click="next">Next</button>
+            <button id="next" class="btn btn-default" v-on:click="next">Next</button>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@
                 <button v-on:click="openDocs" class="col-sm-2 btn btn-default">Browse</button>
             </div>
             <p id="error-text">{{ err }}</p>
-            <button id="next" v-on:click="next">Next</button>
+            <button id="next" class="btn btn-default" v-on:click="next">Next</button>
         </div>
     </div>
 </div>

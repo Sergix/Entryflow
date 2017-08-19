@@ -4,6 +4,7 @@ import jf from 'jsonfile'
 import sidebar from './vue/sidebar'
 import editor from './vue/editor'
 import open from './vue/open'
+import settings from './vue/settings'
 const { app, dialog } = require('electron').remote
 
 jf.spaces = 4
@@ -35,6 +36,7 @@ const checkAppData = () => {
     for (let i = 0; i < jsonData.projects.length; i++) {
       if (jsonData.projects[i].project_name === jsonData.open_project) {
         editor.data.project = jsonData.projects[i]
+        settings.data.project = jsonData.projects[i]
         sidebar.data.project_name = jsonData.projects[i].project_name
         sidebar.methods.generateFileList()
         break

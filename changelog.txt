@@ -1,3 +1,12 @@
+(#11)[8/19/2017-22:07 pre-alpha Sergix]
+    Massive pre-release update.
+    Project settings page created.
+    Editor now uses the ACE editor API, and auto-inserts changelog entries after the user hits the ENTER key twice (or two blank newlines).
+    Incorporation with the GitHub API is currently being investigated.
+    Project loading page styling is almost complete.
+    Updated loader functions (loader.js).
+    Pushed updates to Git.
+
 (#10)[7/17/2017-22:07 pre-alpha Sergix]
     Project changelog and documentation directories are now collapsible.
     Updated the styling of a couple of the loader pages.

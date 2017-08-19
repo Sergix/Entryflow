@@ -4,6 +4,7 @@
         <li id="sidebar-icons" class="row">
             <a v-on:click="settings" href="#"><i data-feather="settings"></i></a>
             <a v-on:click="github" href="#"><i data-feather="github"></i></a>
+            <a v-on:click="save" href="#"><i data-feather="save"></i></a>
         </li>
         <li class="sidebar-brand">
             <a href="#" v-on:click="selectOption">
@@ -33,10 +34,11 @@
 </template>
 
 <script>
-import editor from './editor';
-import sidebar from './sidebar';
-import fs from 'fs';
-const { dialog, shell } = require('electron').remote;
+import editor from './editor'
+import sidebar from './sidebar'
+import settings from './settings'
+import fs from 'fs'
+const { dialog, shell } = require('electron').remote
 
 export default {
     name: 'sidebar',
@@ -46,18 +48,23 @@ export default {
         changelog_files: [],
         doc_file: '',
         changelog_file: '',
-        doc_content: '<i data-feather="chevron-right"></i>Documentation',
-        changelog_content: '<i data-feather="chevron-right"></i>Changelog',
+        doc_content: 'Documentation',
+        changelog_content: 'Changelog',
         doc_expanded: true,
         changelog_expanded: true
     },
     methods: {
         github: (event) => {
             shell.openExternal('https://github.com/Sergix/Entryflow')
+            // openLogin()
         },
-        
-        settings: (event) => {
 
+        settings: (event) => {
+            openSettings()
+        },
+
+        save: (event) => {
+            fs.writeFileSync(editor.data.open_file, editor.data.input)
         },
 
         selectOption: (event) => {
@@ -70,6 +77,8 @@ export default {
                 filename = editor.data.project.doc_path
             else
                 filename = editor.data.project.doc_path + '\\' + event.toElement.text
+
+            editor.data.open_file = filename
 
             fs.readFile(
                 filename,
@@ -85,6 +94,8 @@ export default {
                 filename = editor.data.project.changelog_path
             else
                 filename = editor.data.project.changelog_path + '\\' + event.toElement.text
+
+            editor.data.open_file = filename
 
             fs.readFile(
                 filename,
@@ -102,16 +113,16 @@ export default {
                     sidebar.methods.openDocFile()
                     return
                 }
-                if (sidebar.data.doc_expanded) sidebar.data.doc_content = '<i data-feather="chevron-right"></i>Documentation'
-                else sidebar.data.doc_content = '<i data-feather="chevron-down"></i>Documentation'
+                if (sidebar.data.doc_expanded) sidebar.data.doc_content = 'Documentation'
+                else sidebar.data.doc_content = 'Documentation'
                 sidebar.data.doc_expanded = !sidebar.data.doc_expanded
             } else if (name === 'Changelog') {
                 if (sidebar.data.changelog_file !== '') {
                     sidebar.methods.openChangelogFile()
                     return
                 }
-                if (sidebar.data.changelog_expanded) sidebar.data.changelog_content = '<i data-feather="chevron-right"></i>Changelog'
-                else sidebar.data.changelog_content = '<i data-feather="chevron-down"></i>Changelog'
+                if (sidebar.data.changelog_expanded) sidebar.data.changelog_content = 'Changelog'
+                else sidebar.data.changelog_content = 'Changelog'
                 sidebar.data.changelog_expanded = !sidebar.data.changelog_expanded
             }
         },
@@ -132,6 +143,12 @@ export default {
                 let changelog_files = fs.readdirSync(editor.data.project.changelog_path)
                 sidebar.data.changelog_files = changelog_files
             }
+
+            settings.data.project_name = editor.data.project.project_name
+            settings.data.docfile = fs.statSync(editor.data.project.doc_path).isFile() ? editor.data.project.doc_path : ''
+            settings.data.docpath = fs.statSync(editor.data.project.doc_path).isDirectory() ? editor.data.project.doc_path : ''
+            settings.data.changelogfile = fs.statSync(editor.data.project.changelog_path).isFile() ? editor.data.project.changelog_path : ''
+            settings.data.changelogpath = fs.statSync(editor.data.project.changelog_path).isDirectory() ? editor.data.project.changelog_path : ''
         }
     }
 }

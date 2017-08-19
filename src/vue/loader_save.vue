@@ -5,7 +5,7 @@
         <div id="form" class="form-inline">
             <div class="form-group"><span>Enter project name:</span><input v-model="project_name" class="form-control" type="text"></div>
             <p id="error-text">{{ err }}</p>
-            <button id="next" v-on:click="next">Finish</button>
+            <button id="next" class="btn btn-default" v-on:click="next">Finish</button>
         </div>
     </div>
 </div>
@@ -38,7 +38,9 @@ export default {
                 'changelog_header': changelog.data.header_format,
                 'changelog_direction': changelog.data.entry_direction,
                 'doc_path': docs.data.file_path === '' ? open.data.doc_path : docs.data.file_path,
-                'doc_options': docs.data.doc_options
+                'doc_options': docs.data.doc_options,
+                'entry_count': 0,
+                'oauth_token': ''
             }
 
             newProject(project_settings)

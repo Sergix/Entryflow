@@ -1,3 +1,8 @@
+label {
+    font-size: 10pt;
+    font-family: Geneva, Verdana, sans-serif;
+}
+
 #loader {
     display: none;
 }
@@ -16,44 +21,44 @@
     font-size: 24pt;
 }
 
-#form {
+.form {
     padding: 20px;
     margin-top: 5%;
 }
 
-#form div, #doc-title {
+.form div, #doc-title {
     margin: 10px;
-    font-size: 10pt;
-    font-family: Geneva, Verdana, sans-serif;
 }
 
-#form div button, #form div input {
+.form div button, .form div input {
     margin-left: 20px;
 }
 
-#form div label {
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-#form #error-text {
+.form #error-text {
     color: red;
     bottom: 8px;
     right: 80px;
     position: fixed;
 }
 
-#form #next {
+.form #next {
     bottom: 20px;
     right: 20px;
     position: fixed;
 }
 
-#doc-title {
-    margin-top: 20px;
-    margin-bottom: -20px;
+.form .checkbox label {
+    margin-left: 20px;
 }
 
-#doc-options {
-    padding: 20px;
+#options {
+    margin-top: 20px;
+    margin-left: 60px;
+}
+
+#header-format {
+    font-size: 9pt;
+    font-family: monospace;
+    background-color: #F1F1F1;
+    border-radius: 3px;
 }
