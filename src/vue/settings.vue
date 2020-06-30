@@ -39,7 +39,7 @@
 				<label for="header_format" class="control-label">
 					Entry header format (%d = day, %m = month, %y = year, %h = hour, %hm = hour (24-hour format), %mi = minute, %s = second, %e = entry number, %v = project version, %u = user name)
 				</label>
-				<textarea id="header_format" class="col-sm-12 form-control" rows="1" :value="project.header_format" v-model="project.header_format" type="text"></textarea>
+				<textarea id="header_format" class="col-sm-12 form-control" rows="1" :value="project.changelog_header" v-model="project.changelog_header" type="text"></textarea>
 			</div>
 		</div>
 	</div>

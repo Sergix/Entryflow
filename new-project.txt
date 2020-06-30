@@ -1,0 +1,67 @@
+Purpose of application
+----------------------
+Create an easy, configurable way for devs to manage their project's documentation and release sources
+
+Application specifics
+---------------------
+- Source packaging (ZIP, Wrapfile, etc.)
+- ASCII/md changelog automatic formatting
+- Documentation and patch notes formatting
+- GitHub integration for commit pushing
+- Slack integration for team messaging
+
+Development of application
+--------------------------
+- Electron (native app)
+- VSCode (editor)
+- JavaScript (TypeScript?)
+- Vue.js for app programming
+- Bootstrap for layout
+
+Application Name Ideas
+----------------------
+ Original List		  Narrowed		    Final
+===============	        ============		=============
+- admin						- Entryflow
+- projj
+- changelog
+- buildset
+- buildocs
+- Docwriter
+- docview
+- changedit
+- logger
+- log
+- Prolog
+- Entry			- Entry
+- Entry Log
+- Inform
+- Entrie
+- Entirety		- Entirety
+- Centry		- Centry
+- Centre
+- DocHub
+- EntryHub		- EntryHub
+- Changehub		- Changehub
+- Changeflow		- Changeflow
+- Entryflow		- Entryflow
+
+Application Design/Flow
+-----------------------
+- On open
+	+ If project has been loaded, attempt to load it again
+		+ Project directory information will save in an AppData folder (most likely)
+	+ If project has not been loaded, prompt to select a folder/create a new project
+		+ Ask for project folder
+		+ Ask if there is a changelog/docs folder present
+			+ If not, create either that is not present
+		+ Save project directory as the currently loaded one into a save file (AppData)
+		+ Ask for how changelog/docs should be formatted
+		+ Save settings into project file (AppData)
+- Main Window
+	+ Shows editor in middle-right portion
+	+ Left side has a sidebar showing available files that can be edited
+	+ Settings button for project in top/bottom (?) of sidebar
+	+ Window menu (File/Edit/View/Help)
+- Color Scheme TBD
+- Templates for documentation

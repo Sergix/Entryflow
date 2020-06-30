@@ -36,9 +36,11 @@
 <script>
 import editor from './editor'
 import sidebar from './sidebar'
-import settings from './settings'
 import fs from 'fs'
+import dirTree from 'directory-tree'
 const { dialog, shell } = require('electron').remote
+
+let temp_array
 
 export default {
     name: 'sidebar',
@@ -113,42 +115,55 @@ export default {
                     sidebar.methods.openDocFile()
                     return
                 }
-                if (sidebar.data.doc_expanded) sidebar.data.doc_content = 'Documentation'
-                else sidebar.data.doc_content = 'Documentation'
+                
+                sidebar.data.doc_content = 'Documentation'
+
                 sidebar.data.doc_expanded = !sidebar.data.doc_expanded
             } else if (name === 'Changelog') {
                 if (sidebar.data.changelog_file !== '') {
                     sidebar.methods.openChangelogFile()
                     return
                 }
-                if (sidebar.data.changelog_expanded) sidebar.data.changelog_content = 'Changelog'
-                else sidebar.data.changelog_content = 'Changelog'
+                
+                sidebar.data.changelog_content = 'Changelog'
+
                 sidebar.data.changelog_expanded = !sidebar.data.changelog_expanded
             }
         },
 
+        generateDocList: (tree) => {
+            for (let i = 0; i < tree.children.length; i++) {
+                if (tree.children[i].type === 'directory') {
+                    sidebar.methods.generateDocList(tree.children[i])
+
+                } else {
+                    let path = tree.path.replace('\\', '/') + '/'
+                    sidebar.data.doc_files.push(tree.path + tree.children[i].name)
+                }
+            }
+        },
+
         generateFileList: () => {
-            if (fs.statSync(editor.data.project.doc_path).isFile()) {
-                sidebar.data.doc_file = editor.data.project.doc_path
-                sidebar.data.doc_content = 'Documentation'
-            } else {
-                let doc_files = fs.readdirSync(editor.data.project.doc_path)
-                sidebar.data.doc_files = doc_files
+            if (fs.statSync(editor.data.project.doc_path).isDirectory()) {
+                let filteredTree = dirTree(editor.data.project.doc_path, {extensions:/(\.txt|\.md)/})
+                sidebar.methods.generateDocList(filteredTree)
             }
+            // if (fs.statSync(editor.data.project.doc_path).isFile()) {
+            //     sidebar.data.doc_file = editor.data.project.doc_path
+            //     sidebar.data.doc_content = 'Documentation'
+            // } else {
+            //     let doc_files = fs.readdirSync(editor.data.project.doc_path)
+            //     console.log(doc_files)
+            //     sidebar.data.doc_files = doc_files
+            // }
 
-            if (fs.statSync(editor.data.project.changelog_path).isFile()) {
-                sidebar.data.changelog_file = editor.data.project.changelog_path
-                sidebar.data.changelog_content = 'Changelog'
-            } else {
-                let changelog_files = fs.readdirSync(editor.data.project.changelog_path)
-                sidebar.data.changelog_files = changelog_files
-            }
-
-            settings.data.project_name = editor.data.project.project_name
-            settings.data.docfile = fs.statSync(editor.data.project.doc_path).isFile() ? editor.data.project.doc_path : ''
-            settings.data.docpath = fs.statSync(editor.data.project.doc_path).isDirectory() ? editor.data.project.doc_path : ''
-            settings.data.changelogfile = fs.statSync(editor.data.project.changelog_path).isFile() ? editor.data.project.changelog_path : ''
-            settings.data.changelogpath = fs.statSync(editor.data.project.changelog_path).isDirectory() ? editor.data.project.changelog_path : ''
+            // if (fs.statSync(editor.data.project.changelog_path).isFile()) {
+            //     sidebar.data.changelog_file = editor.data.project.changelog_path
+            //     sidebar.data.changelog_content = 'Changelog'
+            // } else {
+            //     let changelog_files = fs.readdirSync(editor.data.project.changelog_path)
+            //     sidebar.data.changelog_files = changelog_files
+            // }
         }
     }
 }
